@@ -1,0 +1,37 @@
+services:
+  nukerduit-service:
+    build:
+      context: ./nukerduit-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nukerduit-service:/app/nukerduit-service
+
+  nukerduit-db:
+    image: postgres:16
+    container_name: nukerduit-db
+    environment:
+      POSTGRES_USER: "nukerduit"
+      POSTGRES_PASSWORD: "C0b4l4g1"
+      POSTGRES_DB: "nukerduit"
+    ports:
+      - "5433:5432"
+
+  nukerduit-app:
+    build:
+      context: ./nukerduit-app
+      dockerfile: Dockerfile
+    container_name: nukerduit-app
+    working_dir: /app/nukerduit-app
+    volumes:
+      - type: bind
+        source: ./nukerduit-app
+        target: /app/nukerduit-app
+    ports:
+      - "5173:5173"
+
+networks:
+  default:
+    external: true
+    name: gateway
