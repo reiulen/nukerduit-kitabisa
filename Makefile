@@ -28,3 +28,5 @@ migrate:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan migrate
 seed:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan db:seed
+secret:
+	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan jwt:secret

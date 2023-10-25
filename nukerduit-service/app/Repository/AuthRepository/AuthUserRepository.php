@@ -14,6 +14,11 @@ class AuthUserRepository implements AuthUserRepositoryInterface {
         return $this->respondWithToken($token);
     }
 
+    public function profile()
+    {
+        return auth()->user();
+    }
+
     public function logout()
     {
         return auth()->logout();

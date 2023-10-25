@@ -19,3 +19,10 @@ Route::get('/', function () {
         'message' => 'Welcome to Nukerduit Service API',
     ], 200);
 });
+
+Route::get('/unauthenticated', function () {
+    return response([
+        'status' => false,
+        'message' => 'Unauthenticated',
+    ], 401);
+})->name('unauthenticated');

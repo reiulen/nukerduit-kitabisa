@@ -26,4 +26,24 @@ class AuthUserController extends Controller
             return $this->sendResponse(true, $e->getMessage(), 500);
         }
     }
+
+    public function profile()
+    {
+        try {
+            $profile = $this->authUserRepository->profile();
+            return $this->sendResponseWithDatas($profile, 'Get profile successfully!');
+        } catch (\Exception $e) {
+            return $this->sendResponse(true, $e->getMessage(), 500);
+        }
+    }
+
+    public function logout()
+    {
+        try {
+            $this->authUserRepository->logout();
+            return $this->sendResponse(true, 'Logout successfully!');
+        } catch (\Exception $e) {
+            return $this->sendResponse(true, $e->getMessage(), 500);
+        }
+    }
 }

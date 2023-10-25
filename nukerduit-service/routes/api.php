@@ -26,5 +26,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->group(['prefix' => 'auth'], function () use ($router) {
         $router->post('/login', [AuthUserController::class, 'login']);
+        $router->group(['middleware' => 'auth:api'], function () use ($router) {
+            $router->get('/profile', [AuthUserController::class, 'profile']);
+            $router->post('/logout', [AuthUserController::class, 'logout']);
+        });
     });
 });
