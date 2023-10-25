@@ -22,3 +22,9 @@ stop: $(ROOT_DIR)/docker-compose.yml
 
 restart: stop start dev
 
+
+# For Nukerduit Service
+migrate:
+	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan migrate
+seed:
+	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan db:seed

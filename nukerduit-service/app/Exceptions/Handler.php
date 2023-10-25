@@ -2,13 +2,25 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * The list of the inputs that are never flashed to the session on validation exceptions.
+     * A list of the exception types that are not reported.
+     *
+     * @var array<int, class-string<Throwable>>
+     */
+    protected $dontReport = [
+        //
+    ];
+
+    /**
+     * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array<int, string>
      */
@@ -20,11 +32,34 @@ class Handler extends ExceptionHandler
 
     /**
      * Register the exception handling callbacks for the application.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            if ($e instanceof \Illuminate\Auth\AuthenticationException) {
+                return response()->json(['error' => 'Unauthenticated.'], 401);
+            }
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if (!$request->expectsJson()) {
+            if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+                return new JsonResponse([
+                    'status' => false,
+                    'error' => 'Resource not found',
+                ], 404);
+            }
+
+            return new JsonResponse([
+                'status' => false,
+                'error' => $exception->getMessage(),
+            ], 500);
+        }
+
+        return parent::render($request, $exception);
     }
 }

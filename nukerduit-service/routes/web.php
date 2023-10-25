@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response([
+        'status' => true,
+        'message' => 'Welcome to Nukerduit Service API',
+    ], 200);
 });
