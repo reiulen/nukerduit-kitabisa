@@ -26,7 +26,7 @@ class TransactionBuySellRepository implements TransactionBuySellRepositoryInterf
                 'rate_exchange' => $request->rate_exchange,
                 'amount' => $request->amount,
                 'total' => $request->total,
-                'type' => $request->type // buy or sell
+                'type' => $request->type // 1 Buy or 2 Sell
             ]);
             return $transactionBuy;
         });

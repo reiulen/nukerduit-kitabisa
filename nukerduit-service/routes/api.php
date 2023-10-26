@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\TransactionBuySellController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,11 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->group(['prefix' => 'transaction-buy-sell'], function () use ($router) {
         $router->post('/', [TransactionBuySellController::class, 'store']);
     });
+
+    $router->group(['prefix' => 'currency'], function () use ($router) {
+        $router->get('/', [CurrencyController::class, 'index']);
+        $router->get('/big-currency', [CurrencyController::class, 'bigCurrency']);
+        $router->get('/exchange-rate/{currency}', [CurrencyController::class, 'exchangeRate']);
+    });
 });
+
