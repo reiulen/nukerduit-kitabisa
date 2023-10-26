@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TransactionBuySellRequest;
 use App\Repository\TransactionBuySellRepository\TransactionBuySellRepository;
+use Illuminate\Http\Request;
 
 class TransactionBuySellController extends Controller
 {
@@ -12,6 +13,16 @@ class TransactionBuySellController extends Controller
         TransactionBuySellRepository $transactionBuySellRepository
     ) {
         $this->transactionBuySellRepository = $transactionBuySellRepository;
+    }
+
+    public function summary(Request $request)
+    {
+        try {
+            $transactionBuySell = $this->transactionBuySellRepository->Summary($request);
+            return $this->sendResponseWithDatas($transactionBuySell, "Transaction Summary Success", false, 200);
+        } catch (\Exception $e) {
+            return $this->sendResponse(true, $e->getMessage(), 500);
+        }
     }
 
     public function store(TransactionBuySellRequest $request)
@@ -24,4 +35,5 @@ class TransactionBuySellController extends Controller
             return $this->sendResponse(true, $e->getMessage(), 500);
         }
     }
+
 }

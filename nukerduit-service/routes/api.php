@@ -36,6 +36,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->group(['prefix' => 'transaction-buy-sell'], function () use ($router) {
         $router->post('/', [TransactionBuySellController::class, 'store']);
+        $router->get('/summary', [TransactionBuySellController::class, 'summary']);
     });
 
     $router->group(['prefix' => 'currency'], function () use ($router) {

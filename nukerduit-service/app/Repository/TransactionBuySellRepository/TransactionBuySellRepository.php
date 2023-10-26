@@ -16,6 +16,25 @@ class TransactionBuySellRepository implements TransactionBuySellRepositoryInterf
         $this->controller = $controller;
     }
 
+    public function Summary(Request $request)
+    {
+        $transactionBuySell = TransactionBuySell::filter($request)
+                                                ->get()
+                                                ->groupBy('code_currency');
+        $transactionBuySell = $transactionBuySell->map(function ($item, $key) {
+            $total_buy = $item->where('type', 1)->sum('total');
+            $total_sell = $item->where('type', 2)->sum('total');
+            $amount = $total_buy - $total_sell;
+            return [
+                'currency' => $key,
+                'total_buy' => $total_buy,
+                'total_sell' => $total_sell,
+                'total' => $amount
+            ];
+        });
+        return $transactionBuySell;
+    }
+
     public function updateOrCreate(Request $request, $id = null)
     {
         $transactionBuy = $this->controller->atomic(function () use ($request, $id) {
