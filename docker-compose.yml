@@ -16,7 +16,7 @@ services:
       POSTGRES_PASSWORD: "C0b4l4g1"
       POSTGRES_DB: "nukerduit"
     ports:
-      - "5433:5432"
+      - "5432:5432"
 
   nukerduit-app:
     build:

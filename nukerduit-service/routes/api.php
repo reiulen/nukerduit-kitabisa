@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuthUserController;
-use App\Http\Controllers\TransactionBuyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +30,5 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->get('/profile', [AuthUserController::class, 'profile']);
             $router->post('/logout', [AuthUserController::class, 'logout']);
         });
-    });
-
-    $router->group(['prefix' => 'transaction-buy'], function () use ($router) {
-        $router->post('/', [TransactionBuyController::class, 'store']);
     });
 });

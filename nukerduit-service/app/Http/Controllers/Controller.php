@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function atomic(Closure $callback)
+    protected function atomic(Closure $callback)
     {
         return DB::transaction($callback);
     }

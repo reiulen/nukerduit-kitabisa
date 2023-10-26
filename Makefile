@@ -26,8 +26,6 @@ restart: stop start dev
 # For Nukerduit Service
 migrate:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan migrate
-migrate-fresh:
-	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan migrate:fresh
 seed:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan db:seed
 secret:
