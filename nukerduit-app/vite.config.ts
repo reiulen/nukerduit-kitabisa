@@ -10,5 +10,10 @@ export default defineConfig({
      watch: {
        usePolling: true
      }
+  },
+  resolve : {
+    alias : {
+      '@' : '/src'
+    }
   }
 })
