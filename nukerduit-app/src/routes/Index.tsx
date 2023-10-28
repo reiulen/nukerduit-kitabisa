@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../pages/Auth/Login";
-import GuardRoute from "../components/middleware/GuardRoute";
-import GuestOnlyRoute from "../components/middleware/GuestOnlyRoute";
-import DashboardIndex from "../components/pages/Backoffice/Dashboard/Index";
+import Login from "@/pages/Auth/Login";
+import GuardRoute from "@/components/middleware/GuardRoute";
+import GuestOnlyRoute from "@/components/middleware/GuestOnlyRoute";
+import DashboardIndex from "@/components/pages/Backoffice/Dashboard/Index";
 
 const RouteApps = () => {
   return (

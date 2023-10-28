@@ -1,6 +1,18 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
-import { DropdownItemProps, DropdownProps } from "../../types/Index";
+
+type DropdownProps = {
+  children?: React.ReactNode;
+  className?: string;
+  setShow?: React.Dispatch<React.SetStateAction<boolean>>;
+  show?: boolean;
+}
+
+type DropdownItemProps = {
+  children?: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
 
 function Dropdown({ children, className }: DropdownProps) {
   return <div className={clsx("dropdown relative", className)}>{children}</div>;

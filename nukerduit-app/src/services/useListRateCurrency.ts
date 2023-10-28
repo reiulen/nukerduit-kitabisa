@@ -1,5 +1,5 @@
-import { mockQuery } from "../libs/axios-mock";
-import { buildUrl } from "../helpers/helper";
+import { mockQuery } from "@/utils/libs/axios-mock";
+import { buildUrl } from "@/utils/helpers/helper";
 import { useQuery } from "@tanstack/react-query";
 
 type Query = {

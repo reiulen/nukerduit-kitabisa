@@ -1,6 +1,6 @@
 import React from "react";
 import LayoutBackOffice from "@/components/Layout/LayoutBackoffice/Layout.component";
-import FetchListRateCurrency from "@/utils/services/useListRateCurrency";
+import FetchListRateCurrency from "@/services/useListRateCurrency";
 import { numberFormat } from "@/utils/helpers/helper";
 
 type RateCurrency = {

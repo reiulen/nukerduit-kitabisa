@@ -1,4 +1,4 @@
-import {useSessionAuth} from  "../../../stores/useAuthStore";
+import {useSessionAuth} from  "@/stores/useAuthStore";
 import * as React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 

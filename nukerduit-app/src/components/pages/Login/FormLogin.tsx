@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import InputLabel from "../../ui/Input/InputLabel";
+import InputLabel from "@/components/ui/Input/InputLabel";
 import { useEffect, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Button from "../../ui/Button/Button";
-import { useAuthStore, useSessionAuth } from "../../../stores/useAuthStore";
+import Button from "@/components/ui/Button/Button";
+import { useAuthStore, useSessionAuth } from "@/stores/useAuthStore";
 import { FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
