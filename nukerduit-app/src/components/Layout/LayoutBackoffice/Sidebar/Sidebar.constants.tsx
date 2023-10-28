@@ -20,8 +20,4 @@ export const SidebarData : SidebarDataProps[] = [
     name: "Summary",
     link: "/admin/summary",
   },
-  {
-    name: "Logout",
-    link: "",
-  },
 ];

@@ -20,28 +20,40 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         $data = collect();
         if ($response->successful())
             $data = collect($response->json());
-        return $data;
+        return $data->values();
     }
 
-    public function bigCurrency(Request $request)
+    public function listRateCurrency(Request $request)
     {
         $detailCurrency = $this->detailCurrency('idr');
         if($detailCurrency->isEmpty())
             return collect();
         $currencyIdr = $detailCurrency['idr'];
+
+        //4 list currency
         if($request->list4Currency)
             $currencyIdr = collect($currencyIdr)->only($this->list4Currency);
+
         $converCurrencyIdr = collect();
         foreach($currencyIdr as $key => $value){
-            $converCurrencyIdr[$key] = round(1 / $value, 2);
+            $converCurrencyIdr[] = [
+                'currency' => $key,
+                'rate' => round(1 / $value, 2)
+            ];
         }
 
-        $sortBigCurrency = $converCurrencyIdr->sortByDesc(function ($value, $key) {
-            return $value;
-        });
+        //sort by
+        if($request->sort_type && $request->sort_by) {
+            if($request->sort_type == 'asc')
+                $converCurrencyIdr = $converCurrencyIdr->sortBy($request->sort_by);
+            else if($request->sort_type == 'desc')
+                $converCurrencyIdr = $converCurrencyIdr->sortByDesc($request->sort_by);
+        }
+
         if($request->take)
-            $sortBigCurrency = $sortBigCurrency->take($request->take);
-        return $sortBigCurrency;
+            $converCurrencyIdr = $converCurrencyIdr->take($request->take);
+
+        return $converCurrencyIdr->values();
     }
 
     private function detailCurrency($currency)

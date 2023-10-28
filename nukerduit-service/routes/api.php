@@ -28,21 +28,26 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
 
     $router->group(['prefix' => 'auth'], function () use ($router) {
         $router->post('/login', [AuthUserController::class, 'login']);
-        $router->group(['middleware' => 'auth:api'], function () use ($router) {
+    });
+
+    $router->group(['middleware' => 'auth:api'], function () use ($router) {
+        $router->group(['prefix' => 'auth'], function () use ($router) {
             $router->get('/profile', [AuthUserController::class, 'profile']);
             $router->post('/logout', [AuthUserController::class, 'logout']);
         });
-    });
 
-    $router->group(['prefix' => 'transaction-buy-sell'], function () use ($router) {
-        $router->post('/', [TransactionBuySellController::class, 'store']);
-        $router->get('/summary', [TransactionBuySellController::class, 'summary']);
+        $router->group(['prefix' => 'transaction-buy-sell'], function () use ($router) {
+            $router->post('/', [TransactionBuySellController::class, 'store']);
+            $router->get('/summary', [TransactionBuySellController::class, 'summary']);
+        });
+    
+        $router->group(['prefix' => 'currency'], function () use ($router) {
+            $router->get('/', [CurrencyController::class, 'index']);
+            $router->get('/rate-currency', [CurrencyController::class, 'rateCurrency']);
+            $router->get('/exchange-rate/{currency}', [CurrencyController::class, 'exchangeRate']);
+        });
     });
-
-    $router->group(['prefix' => 'currency'], function () use ($router) {
-        $router->get('/', [CurrencyController::class, 'index']);
-        $router->get('/big-currency', [CurrencyController::class, 'bigCurrency']);
-        $router->get('/exchange-rate/{currency}', [CurrencyController::class, 'exchangeRate']);
-    });
+        
 });
+
 

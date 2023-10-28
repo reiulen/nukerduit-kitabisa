@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axios, { AxiosError } from "axios";
+import apiMock from "@/utils/libs/axios-mock";
 
 type SessionUser = {
   token: string;
@@ -89,15 +90,9 @@ export const useAuthStore = create<AuthUserState>((set) => ({
   logOut: async () => {
     try {
       set({ process: { status: "loading", type: "logout" } });
-      const token = JSON.parse(localStorage.getItem("sessionUser")!)?.state?.sessionUser?.access_token;
-      const { data } = await axios.post(
+      const { data } = await apiMock.post(
         `${import.meta.env.VITE_API_URL}/auth/logout`,
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
       );
 
       const status = data?.status;

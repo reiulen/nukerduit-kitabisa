@@ -25,11 +25,11 @@ class CurrencyController extends Controller
         }
     }
 
-    public function bigCurrency(Request $request)
+    public function rateCurrency(Request $request)
     {
         try {
-            $currency = $this->currencyRepository->bigCurrency($request);
-            return $this->sendResponseWithDatas($currency, 'Success get big currency', false, 200);
+            $currency = $this->currencyRepository->listRateCurrency($request);
+            return $this->sendResponseWithDatas($currency, 'Success get list rate currency', false, 200);
         }catch (\Exception $e){
             return $this->sendResponse(false, $e->getMessage(), 500);
         }

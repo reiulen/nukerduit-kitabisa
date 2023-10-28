@@ -4,6 +4,7 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import { Dropdown } from "@/components/ui/Dropdown/Dropdown";
 import { useAuthStore, useSessionAuth } from "@/stores/useAuthStore";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 type NavbarProps = {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,7 +16,16 @@ export default function Navbar({ setSidebarOpen }: NavbarProps) {
   const { process, logOut } = useAuthStore();
 
   const handleLogout = async () => {
-    logOut();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of the application!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+    }).then((result) => {
+      if (result.isConfirmed) logOut();
+    });
   };
 
   useEffect(() => {

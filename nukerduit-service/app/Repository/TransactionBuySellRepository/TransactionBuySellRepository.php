@@ -31,7 +31,7 @@ class TransactionBuySellRepository implements TransactionBuySellRepositoryInterf
                 'total_sell' => $total_sell,
                 'total' => $amount
             ];
-        });
+        })->values();
         return $transactionBuySell;
     }
 
