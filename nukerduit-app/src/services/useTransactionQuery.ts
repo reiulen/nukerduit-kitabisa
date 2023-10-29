@@ -17,8 +17,9 @@ export const FetchListSummaryTransaction = (query: Query) => {
   const resQuery = useQuery({
     queryKey: [link],
     queryFn: mockQuery,
-    staleTime: 300000, // 5 minutes
-    refetchInterval: 300000,
+    refetchIntervalInBackground: true,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
   
   if(resQuery?.isError) {

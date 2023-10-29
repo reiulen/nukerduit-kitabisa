@@ -60,7 +60,7 @@ export default function BuyTransactionIndex() {
     clearErrors,
   } = useForm<InputBuyTransaction>();
 
-  const { mutate, isLoading: isLoadingMutation } = MutationTransaction({
+  const { mutate, isPending: isPendigMutation } = MutationTransaction({
     onError: (error) => {
       setError(error?.response?.data?.errors || {});
     },
@@ -180,7 +180,7 @@ export default function BuyTransactionIndex() {
             })}
           />
           <div className="flex gap-3 items-center mt-6">
-            <Button isLoading={isLoadingMutation} variant="green">
+            <Button isLoading={isPendigMutation} variant="green">
               Submit
             </Button>
             <Button
