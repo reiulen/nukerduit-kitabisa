@@ -43,6 +43,6 @@ secret:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_SERVICE) php artisan jwt:secret
 
 #For Nukerduit APP
-install_app:
+app_install:
 	$(DOCKER_COMPOSE) exec $(DOCKER_NAME_APP) npm install
 
