@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "@/pages/Auth/Login";
 import GuardRoute from "@/components/middleware/GuardRoute";
 import GuestOnlyRoute from "@/components/middleware/GuestOnlyRoute";
-import DashboardIndex from "@/components/pages/Backoffice/Dashboard/Index";
-import BuyTransactionIndex from "@/components/pages/Backoffice/BuyTransaction/Index";
+import DashboardIndex from "@/pages/Dashboard/Index";
+import BuyTransactionIndex from "@/pages/BuyTransaction/Index";
 
 const RouteApps = () => {
   return (

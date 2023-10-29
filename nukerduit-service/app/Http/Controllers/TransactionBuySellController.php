@@ -27,11 +27,10 @@ class TransactionBuySellController extends Controller
 
     public function store(TransactionBuySellRequest $request)
     {
-        return $request->all();
         try {
-            $this->transactionBuySellRepository->updateOrCreate($request, null);
+            $transactionBuySellRepository = $this->transactionBuySellRepository->updateOrCreate($request, null);
             $type = $request->type == 1 ? 'Buy' : 'Sell';
-            return $this->sendResponse(true, "Transaction $type Success", 200);
+            return $this->sendResponse(true, "Transaction $type Success {$transactionBuySellRepository->code_currency} to IDR with amount {$transactionBuySellRepository->amount}", 200);
         } catch (\Exception $e) {
             return $this->sendResponse(true, $e->getMessage(), 500);
         }

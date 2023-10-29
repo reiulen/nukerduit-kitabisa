@@ -57,7 +57,7 @@ export default function BuyTransactionIndex() {
     formState: { errors },
     watch,
     reset,
-    clearErrors
+    clearErrors,
   } = useForm<InputBuyTransaction>();
 
   const { mutate, isLoading: isLoadingMutation } = MutationTransaction({
@@ -80,8 +80,8 @@ export default function BuyTransactionIndex() {
     mutate({
       code_currency: currency?.data?.currency,
       rate_exchange: currency?.data?.rate,
-      amount: amount,
-      total: total,
+      amount: amount?.replace(/[^0-9.]/g, ""),
+      total: total?.replace(/[^0-9.]/g, ""),
       type: 1,
     });
   };
@@ -101,6 +101,16 @@ export default function BuyTransactionIndex() {
     });
   };
 
+  const handleChangeCurrency = () => {
+    let value = getValues()?.amount || "";
+    value = value.replace(/[^0-9.]/g, "");
+    const total = numberFormatDescimals(
+      value * (getValues()?.currency?.data?.rate || 0)
+    );
+    setValue("amount", value);
+    setValue("total", total);
+  };
+
   return (
     <LayoutBackOffice>
       <div className="w-[40%]">
@@ -112,6 +122,9 @@ export default function BuyTransactionIndex() {
             classNameForm="mb-4"
             classNameLabel="mb-2"
             placeholder="Select Currency"
+            onChange={() => {
+                handleChangeCurrency();
+            }}
             rules={{
               required: "Currency is required",
             }}
@@ -148,14 +161,7 @@ export default function BuyTransactionIndex() {
             type="text"
             {...register("amount", {
               required: "Amount is required",
-              onChange: (e) => {
-                const value = e.target.value.replace(/[^0-9.]/g, '');
-                const total = numberFormatDescimals(
-                  value * (getValues()?.currency?.data?.rate || 0)
-                );
-                setValue("amount", value);
-                setValue("total", total);
-              },
+              onChange: handleChangeCurrency,
             })}
           />
           <InputLabel

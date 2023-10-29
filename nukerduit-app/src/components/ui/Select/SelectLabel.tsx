@@ -25,6 +25,7 @@ type SelectLabel = {
   rules?: RegisterOptions;
   getOptionLabel: (option: OptionType) => JSX.Element;
   onInputChange: (value: string) => void;
+  onChange?: (value: OptionType) => void;
 }
 
 type CustomStyles = StylesConfig<OptionType, false>;
@@ -43,6 +44,7 @@ export default function SelectLabel({
   rules,
   getOptionLabel,
   onInputChange,
+  onChange
 }: SelectLabel) {
   const customStyles: CustomStyles = {
     control: (provided, state) => ({
@@ -98,6 +100,10 @@ export default function SelectLabel({
         render={({ field }) => (
           <Select
             {...field}
+            onChange={(value) => {
+              field.onChange(value);
+              onChange && onChange(value);
+            }}
             options={option}
             className={className}
             placeholder={placeholder}
