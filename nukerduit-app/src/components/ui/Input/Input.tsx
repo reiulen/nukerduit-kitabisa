@@ -10,7 +10,7 @@ type InputProps = {
   value?: string;
 };
 
-const InputLabel = forwardRef(
+const Input = forwardRef(
   (
     {
       placeholder,
@@ -46,4 +46,4 @@ const InputLabel = forwardRef(
   }
 );
 
-export default InputLabel;
+export default Input;

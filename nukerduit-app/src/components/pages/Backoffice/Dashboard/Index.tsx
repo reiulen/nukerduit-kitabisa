@@ -1,11 +1,11 @@
 import React from "react";
 import LayoutBackOffice from "@/components/Layout/LayoutBackoffice/Layout.component";
-import FetchListRateCurrency from "@/services/useListRateCurrency";
-import { numberFormat } from "@/utils/helpers/helper";
+import { numberFormatDescimals } from "@/utils/helpers/helper";
+import { FetchListRateCurrencyQuery } from "@/services/useListRateCurrencyQuery";
 
 type RateCurrency = {
   currency: string;
-  rate: number;
+  rate: string;
 };
 
 export default function DashboardIndex() {
@@ -13,11 +13,11 @@ export default function DashboardIndex() {
     data: dataList4Currency,
     isLoading,
     isPending,
-  } = FetchListRateCurrency({
+  } = FetchListRateCurrencyQuery({
     list4Currency: true,
   });
 
-  const { data: dataListAll } = FetchListRateCurrency({
+  const { data: dataListAll } = FetchListRateCurrencyQuery({
     sort_by: "rate",
     sort_type: "desc",
     take: 4,
@@ -44,11 +44,11 @@ export default function DashboardIndex() {
                     key={index}
                     className="block p-6 bg-white border border-gray-200 rounded-[8px] hover:bg-gray-50 "
                   >
-                    <h3 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900">
+                    <h3 className="mb-2 text-xl font-semibold tracking-tight text-gray-900">
                       {item?.currency?.toUpperCase()}
                     </h3>
-                    <h1 className="font-bold text-red-600 text-4xl">
-                      {numberFormat(item?.rate)}
+                    <h1 className="font-bold text-red-600 text-2xl">
+                      {numberFormatDescimals(item?.rate)}
                     </h1>
                   </div>
                 ))
@@ -78,7 +78,7 @@ export default function DashboardIndex() {
                         {item?.currency?.toUpperCase()}
                       </h3>
                       <h1 className="font-bold text-red-600 text-4xl">
-                        {numberFormat(item?.rate)}
+                        {numberFormatDescimals(item?.rate)}
                       </h1>
                     </div>
                   )

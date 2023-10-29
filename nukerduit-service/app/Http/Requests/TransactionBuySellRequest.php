@@ -26,6 +26,7 @@ class TransactionBuySellRequest extends FormRequest
             'rate_exchange' => 'required|numeric',
             'amount' => 'required|numeric',
             'total' => 'required|numeric',
+            'type' => 'required|numeric|in:1,2',
         ];
     }
 }

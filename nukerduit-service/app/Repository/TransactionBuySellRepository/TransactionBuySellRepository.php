@@ -37,6 +37,7 @@ class TransactionBuySellRepository implements TransactionBuySellRepositoryInterf
 
     public function updateOrCreate(Request $request, $id = null)
     {
+        return $request->all();
         $transactionBuy = $this->controller->atomic(function () use ($request, $id) {
             $transactionBuy = TransactionBuySell::updateOrCreate([
                 'id' => $id  ?? Str::uuid(),

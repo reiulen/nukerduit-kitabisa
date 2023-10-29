@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
+class ComposerStaticInit3ba5e9c6fb038f90c34c7db51e056215
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -359,8 +359,8 @@ class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -552,6 +552,7 @@ class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\TransactionBuySellRequest' => __DIR__ . '/../..' . '/app/Http/Requests/TransactionBuySellRequest.php',
         'App\\Models\\TransactionBuySell' => __DIR__ . '/../..' . '/app/Models/TransactionBuySell.php',
@@ -677,6 +678,7 @@ class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
@@ -6538,6 +6540,9 @@ class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
+        'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
+        'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
         'TheSeer\\Tokenizer\\NamespaceUriException' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUriException.php',
@@ -6648,9 +6653,9 @@ class ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInited3713ddbd59e71f8c09efd60051bd2f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3ba5e9c6fb038f90c34c7db51e056215::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3ba5e9c6fb038f90c34c7db51e056215::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3ba5e9c6fb038f90c34c7db51e056215::$classMap;
 
         }, null, ClassLoader::class);
     }

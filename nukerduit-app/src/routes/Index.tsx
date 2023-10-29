@@ -3,6 +3,7 @@ import Login from "@/pages/Auth/Login";
 import GuardRoute from "@/components/middleware/GuardRoute";
 import GuestOnlyRoute from "@/components/middleware/GuestOnlyRoute";
 import DashboardIndex from "@/components/pages/Backoffice/Dashboard/Index";
+import BuyTransactionIndex from "@/components/pages/Backoffice/BuyTransaction/Index";
 
 const RouteApps = () => {
   return (
@@ -12,6 +13,7 @@ const RouteApps = () => {
       </Route>
       <Route path="/admin/*" element={<GuardRoute />}>
         <Route path="dashboard" element={<DashboardIndex />} />
+        <Route path="buy-transaction" element={<BuyTransactionIndex />} />
       </Route>
     </Routes>
   );

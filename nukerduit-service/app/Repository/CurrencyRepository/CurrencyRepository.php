@@ -30,6 +30,11 @@ class CurrencyRepository implements CurrencyRepositoryInterface
             return collect();
         $currencyIdr = $detailCurrency['idr'];
 
+        if($request->keyword)
+            $currencyIdr = collect($currencyIdr)->filter(function ($value, $key) use ($request) {
+                return strpos($key, $request->keyword) !== false || strpos($value, strtoupper($request->keyword)) !== false;
+            });
+
         //4 list currency
         if($request->list4Currency)
             $currencyIdr = collect($currencyIdr)->only($this->list4Currency);

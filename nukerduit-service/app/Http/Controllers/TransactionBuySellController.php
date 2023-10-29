@@ -27,6 +27,7 @@ class TransactionBuySellController extends Controller
 
     public function store(TransactionBuySellRequest $request)
     {
+        return $request->all();
         try {
             $this->transactionBuySellRepository->updateOrCreate($request, null);
             $type = $request->type == 1 ? 'Buy' : 'Sell';

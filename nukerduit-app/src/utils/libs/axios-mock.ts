@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 const baseURL = import.meta.env.VITE_API_URL;
 
 export const apiMock = axios.create({
@@ -28,8 +28,11 @@ apiMock.interceptors.response.use(
   (error) => {
     if (error.response?.data.message) {
       const message = error.response.data.message;
-      toast.error(message);
-      console.log(message)
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: message,
+      });
       if(message == 'Unauthenticated.') {
         localStorage.clear();
         window.location.reload();
@@ -58,13 +61,6 @@ type QueryKey = {
   queryKey: [string];
 };
 
-type MutationKey = {
-  queryKey: [string];
-  data: {
-    [key: string]: string | number;
-  };
-};
-
 export const mockQuery = async ({ queryKey }: QueryKey) => {
   const [url] = queryKey;
 
@@ -72,19 +68,21 @@ export const mockQuery = async ({ queryKey }: QueryKey) => {
     const { data } = await apiMock.get(url);
     return data;
   } catch (error) {
-    console.error("Error in mockQuery:", error);
-    throw error;
+    return Promise.reject(error);
   }
 };
 
-export const mockMutation = async ({ queryKey, data }: MutationKey) => {
-  const [url] = queryKey;
+type MutationTypes = {
+  data: {
+    [key: string]: string | number;
+  };
+};
 
+export const mockMutation = async (url: string, data: MutationTypes['data']) => {
   try {
     const { data: response } = await apiMock.post(url, data);
     return response;
   } catch (error) {
-    console.error("Error in mockMutation:", error);
-    throw error;
+    return Promise.reject(error);
   }
 };
