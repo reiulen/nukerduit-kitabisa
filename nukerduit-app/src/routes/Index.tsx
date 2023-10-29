@@ -5,7 +5,7 @@ import GuestOnlyRoute from "@/components/middleware/GuestOnlyRoute";
 import DashboardIndex from "@/pages/Dashboard/Index";
 import BuyTransactionIndex from "@/pages/BuyTransaction/Index";
 import SellTransactionIndex from "@/pages/SellTransaction/Index";
-import SummaryTranscationIndex from "@/pages/SummaryTransaction/Index";
+import SummaryTranscationIndex from "@/pages/SellTransaction copy/Index";
 
 const RouteApps = () => {
   return (

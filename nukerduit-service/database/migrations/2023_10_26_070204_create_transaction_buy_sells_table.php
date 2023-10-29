@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('transaction_buy_sells', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('code_currency');
-            $table->decimal('rate_exchange', 10, 2);
-            $table->decimal('amount', 10, 2);
-            $table->decimal('total', 10, 2);
+            $table->decimal('rate_exchange', 32, 2);
+            $table->decimal('amount', 32, 2);
+            $table->decimal('total', 32, 2);
             $table->enum('type', [1, 2])->comment('1: buy, 2: sell');
             $table->timestamps();
         });
