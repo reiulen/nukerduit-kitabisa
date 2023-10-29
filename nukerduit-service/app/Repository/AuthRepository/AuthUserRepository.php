@@ -2,14 +2,26 @@
 
 namespace App\Repository\AuthRepository;
 
+use App\Http\Controllers\Controller;
+use App\Models\AuthHistory;
 use App\Repository\AuthRepository\AuthUserRepositoryInterface;
 
 class AuthUserRepository implements AuthUserRepositoryInterface {
+
+    protected $controller;
+    public function __construct(Controller $controller)
+    {
+        $this->controller = $controller;
+    }
 
     public function login($credentials)
     {
         if (!$token = auth()->attempt($credentials))
             return false;
+
+        $this->controller->atomic(function () {
+            $this->historyLogin('login');
+        });
 
         return $this->respondWithToken($token);
     }
@@ -21,6 +33,10 @@ class AuthUserRepository implements AuthUserRepositoryInterface {
 
     public function logout()
     {
+        $this->controller->atomic(function () {
+            $this->historyLogin('logout');
+        });
+        
         return auth()->logout();
     }
 
@@ -38,5 +54,18 @@ class AuthUserRepository implements AuthUserRepositoryInterface {
                 'username' => $user->username
             ]
         ];
+    }
+
+    private function historyLogin($type)
+    {
+        $historyLogin = AuthHistory::create([
+            'user_id' => auth()->user()->id,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'payload_user' => json_encode(auth()->user()),
+            'type' => $type
+        ]);
+
+        return $historyLogin;
     }
 }

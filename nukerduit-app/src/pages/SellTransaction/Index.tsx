@@ -10,7 +10,7 @@ import { MutationTransaction } from "@/services/useTransactionQuery";
 import Button from "@/components/ui/Button/Button";
 import Swal from "sweetalert2";
 
-type InputBuyTransaction = {
+type InputSellTransaction = {
   currency?: {
     value: string;
     label: string;
@@ -27,7 +27,7 @@ type Error = {
   [key: string]: string[];
 };
 
-export default function BuyTransactionIndex() {
+export default function SellTransactionIndex() {
   const [error, setError] = useState<Error>({
     code_currency: [],
     amount: [],
@@ -58,7 +58,7 @@ export default function BuyTransactionIndex() {
     watch,
     reset,
     clearErrors,
-  } = useForm<InputBuyTransaction>();
+  } = useForm<InputSellTransaction>();
 
   const { mutate, isLoading: isLoadingMutation } = MutationTransaction({
     onError: (error) => {
@@ -75,14 +75,14 @@ export default function BuyTransactionIndex() {
     },
   });
 
-  const onSubmit = async (data: InputBuyTransaction) => {
+  const onSubmit = async (data: InputSellTransaction) => {
     const { currency, amount, total } = data;
     mutate({
       code_currency: currency?.data?.currency,
       rate_exchange: currency?.data?.rate,
       amount: amount?.replace(/[^0-9.]/g, ""),
       total: total?.replace(/[^0-9.]/g, ""),
-      type: 1,
+      type: 2,
     });
   };
 
@@ -114,7 +114,7 @@ export default function BuyTransactionIndex() {
   return (
     <LayoutBackOffice>
       <div className="flex items-center mb-6">
-        <div className="text-2xl font-bold">Buy Currency</div>
+        <div className="text-2xl font-bold">Sell Currency</div>
       </div>
       <div className="w-[40%]">
         <form onSubmit={handleSubmit(onSubmit)}>

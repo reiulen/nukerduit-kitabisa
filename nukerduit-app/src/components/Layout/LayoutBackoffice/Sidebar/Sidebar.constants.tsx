@@ -18,6 +18,6 @@ export const SidebarData : SidebarDataProps[] = [
   },
   {
     name: "Summary",
-    link: "/admin/summary",
+    link: "/admin/summary-transaction",
   },
 ];
