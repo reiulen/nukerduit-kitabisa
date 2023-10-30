@@ -12,16 +12,22 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev
 
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install pdo_pgsql pdo_mysql mbstring exif pcntl bcmath gd
 
-RUN curl -sS https://getcomposer.org/installer | php -- --version=2.4.3 --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+COPY composer.json ./
+COPY composer.lock ./
+
+RUN [ -f vendor/autoload.php ] || composer install --no-scripts
 
 COPY . .
-# RUN composer update --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
-# RUN composer dump-autoload
-RUN composer install
+
+COPY .env.example .env
+RUN php artisan key:generate
 
 EXPOSE 8000
 
